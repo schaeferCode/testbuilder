@@ -22,6 +22,10 @@ var detectNetwork = function(cardNumber) {
   	return 'Diner\'s Club';
   } else if (cardArray[0] === '3' && cardArray[1] === '4' || '7' && cardArray.length === 15) {
   	return 'American Express';
+  } else if (cardArray[0] === '4' && (cardArray.length === 13 || 16 || 19)) {
+  	return 'Visa';
+  } else if (cardArray[0] === '5' && cardArray[1] === 1 || 2 || 3 || 4 || 5 && cardArray.length === 16) {
+  	return 'MasterCard';
   }
 };
 
