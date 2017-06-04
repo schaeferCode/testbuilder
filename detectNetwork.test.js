@@ -141,13 +141,33 @@ describe('Discover', function() {
   // Implement these tests (and others) and make them pass!
   var expect = chai.expect;
 
+  for (prefix = 644; prefix <= 649; prefix ++) {
+    (function(prefix) {
+      it('has a prefix of ' + prefix + ' and a length of 16'), function() {
+        expect(detectNetwork(prefix + '4567890123456')).to.equal('Discover');
+      }
+      it('has a prefix of ' + prefix + ' and a length of 19'), function () {
+        expect(detectNetwork(prefix + '4567890123456789')).to.equal('Discover')
+      }
+    }(prefix))
+  }
+
   it('has a prefix of 6011 and a length of 16'), function() {
-    expect(detectNetwork('60115678901234')).to.equal('Discover');
+    expect(detectNetwork('6011567890123456')).to.equal('Discover');
   }
 
   it('has a prefix of 6011 and a length of 19'), function() {
     expect(detectNetwork('6011567890123456789')).to.equal('Discover');
   }
+
+  it('has a prefix of 65 and a length of 16'), function() {
+    expect(detectNetwork('6534567890123456')).to.equal('Discover');
+  }
+
+  it('has a prefix of 65 and a length of 19'), function() {
+    expect(detectNetwork('6534567890123456789')).to.equal('Discover');
+  }
+
 });
 
 describe('Maestro', function() {
