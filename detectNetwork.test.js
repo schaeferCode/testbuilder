@@ -143,11 +143,11 @@ describe('Discover', function() {
 
   for (prefix = 644; prefix <= 649; prefix ++) {
     (function(prefix) {
-      it('has a prefix of ' + prefix + ' and a length of 16'), function() {
-        expect(detectNetwork(prefix + '4567890123456')).to.equal('Discover');
+      it('has a prefix of ' + prefix.toString() + ' and a length of 16'), function() {
+        expect(detectNetwork(prefix.toString() + '4567890123456')).to.equal('Discover');
       }
-      it('has a prefix of ' + prefix + ' and a length of 19'), function () {
-        expect(detectNetwork(prefix + '4567890123456789')).to.equal('Discover')
+      it('has a prefix of ' + prefix.toString() + ' and a length of 19'), function () {
+        expect(detectNetwork(prefix.toString() + '4567890123456789')).to.equal('Discover')
       }
     }(prefix))
   }
@@ -177,7 +177,7 @@ describe('Maestro', function() {
   for (length = 12; length <= 19; length ++) {
     (function (length) {
       it('has prefix 5018 and a length of ' + length), function () {
-        expect(detectNetwork('5018' + ._range(length-4))).to.equal('Maestro');
+        expect(detectNetwork('5018' + ._range(length-4).join(''))).to.equal('Maestro');
       }
     }
   }
@@ -185,7 +185,7 @@ describe('Maestro', function() {
   for (length = 12; length <= 19; length ++) {
     (function (length) {
       it('has prefix 5020 and a length of ' + length), function () {
-        expect(detectNetwork('5020' + ._range(length-4))).to.equal('Maestro');
+        expect(detectNetwork('5020' + ._range(length-4).join(''))).to.equal('Maestro');
       }
     }
   }
@@ -193,7 +193,7 @@ describe('Maestro', function() {
   for (length = 12; length <= 19; length ++) {
     (function (length) {
       it('has prefix 5038 and a length of ' + length), function () {
-        expect(detectNetwork('5038' + ._range(length-4))).to.equal('Maestro');
+        expect(detectNetwork('5038' + ._range(length-4).join(''))).to.equal('Maestro');
       }
     }
   }
@@ -201,7 +201,7 @@ describe('Maestro', function() {
   for (length = 12; length <= 19; length ++) {
     (function (length) {
       it('has prefix 6304 and a length of ' + length), function () {
-        expect(detectNetwork('6304' + ._range(length-4))).to.equal('Maestro');
+        expect(detectNetwork('6304' + ._range(length-4).join(''))).to.equal('Maestro');
       }
     }
   }
