@@ -7,6 +7,27 @@
 // other places in this file where you'll replace the FILL_ME_IN with a
 // different value.
 var FILL_ME_IN = 'Fill this value in';
+var _ = function(obj) {
+    if (obj instanceof _) return obj;
+    if (!(this instanceof _)) return new _(obj);
+    this._wrapped = obj;
+  };
+_.range = function(start, stop, step) {
+    if (stop == null) {
+      stop = start || 0;
+      start = 0;
+    }
+    step = step || 1;
+
+    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var range = Array(length);
+
+    for (var idx = 0; idx < length; idx++, start += step) {
+      range[idx] = start;
+    }
+
+    return range;
+  };
  
 describe('Introduction to Mocha Tests - READ ME FIRST', function() {
   // A Mocha test is just a function!
@@ -86,6 +107,7 @@ describe('Visa', function() {
 
   it('has a prefix of 4 and a length of 13', function() {
     assert(detectNetwork('4123456789012') === 'Visa');
+    console.log('VISA');
   });
 
   it('has a prefix of 4 and a length of 16', function() {
@@ -136,12 +158,51 @@ describe('MasterCard', function() {
  
 });
 
+describe('Maestro', function() {
+  // Write full test coverage for the Maestro card
+  var expect = chai.expect;
+
+  for (length = 12; length <= 19; length ++) {
+    (function (length) {
+      it('has prefix 5018 and a length of ' + length), function () {
+        expect(detectNetwork('5018' + _.range(length-4).join(''))).to.equal('Maestro');
+      }
+    });
+  }
+
+  for (length = 12; length <= 19; length ++) {
+    (function (length) {
+      it('has prefix 5020 and a length of ' + length), function () {
+        expect(detectNetwork('5020' + _.range(length-4).join(''))).to.equal('Maestro');
+      }
+    });
+  }
+
+  for (length = 12; length <= 19; length ++) {
+    (function (length) {
+      it('has prefix 5038 and a length of ' + length), function () {
+        expect(detectNetwork('5038' + _.range(length-4).join(''))).to.equal('Maestro');
+      }
+    });
+  }
+
+  for (length = 12; length <= 19; length ++) {
+    (function (length) {
+      it('has prefix 6304 and a length of ' + length), function () {
+        expect(detectNetwork('6304' + _.range(length-4).join(''))).to.equal('Maestro');
+      }
+    });
+  }
+});
+
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   var expect = chai.expect;
+  console.log('inside describe');
 
   for (prefix = 644; prefix <= 649; prefix ++) {
+    console.log('for loop');
     (function(prefix) {
       it('has a prefix of ' + prefix.toString() + ' and a length of 16'), function() {
         expect(detectNetwork(prefix.toString() + '4567890123456')).to.equal('Discover');
@@ -154,6 +215,7 @@ describe('Discover', function() {
 
   it('has a prefix of 6011 and a length of 16'), function() {
     expect(detectNetwork('6011567890123456')).to.equal('Discover');
+    console.log('test');
   }
 
   it('has a prefix of 6011 and a length of 19'), function() {
@@ -170,42 +232,6 @@ describe('Discover', function() {
 
 });
 
-describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
-  var expect = chai.expect;
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5018 and a length of ' + length), function () {
-        expect(detectNetwork('5018' + ._range(length-4).join(''))).to.equal('Maestro');
-      }
-    }
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5020 and a length of ' + length), function () {
-        expect(detectNetwork('5020' + ._range(length-4).join(''))).to.equal('Maestro');
-      }
-    }
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5038 and a length of ' + length), function () {
-        expect(detectNetwork('5038' + ._range(length-4).join(''))).to.equal('Maestro');
-      }
-    }
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 6304 and a length of ' + length), function () {
-        expect(detectNetwork('6304' + ._range(length-4).join(''))).to.equal('Maestro');
-      }
-    }
-  }
-});
 
 describe('should support China UnionPay')
 describe('should support Switch')
