@@ -24,7 +24,7 @@ var detectNetwork = function(cardNumber) {
   	return 'American Express';
   } else if (cardArray[0] === '4' && (cardArray.length === 13 || 16 || 19)) {
   	return 'Visa';
-  } else if (cardArray[0] === '5' && (cardArray[1] === 1 || 2 || 3 || 4 || 5) && cardArray.length === 16) {
+  } else if (cardArray[0] === '5' && cardArray[1] !== '0' && cardArray.length === 16) {
   	return 'MasterCard';
   } else if (cardArray[0] === '6' &&  cardArray[1] !== '3' && (cardArray.length === 16 || 19)) {
     return 'Discover';

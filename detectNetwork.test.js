@@ -107,7 +107,6 @@ describe('Visa', function() {
 
   it('has a prefix of 4 and a length of 13', function() {
     assert(detectNetwork('4123456789012') === 'Visa');
-    console.log('VISA');
   });
 
   it('has a prefix of 4 and a length of 16', function() {
@@ -146,52 +145,31 @@ describe('MasterCard', function() {
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
   // use either expect or should, but not both. 
-  var should = chai.should();
+  var expect = chai.expect();
   
   it('has a prefix of 54 and a length of 16', function() {
-    detectNetwork('5412345678901234').should.equal('MasterCard');
+    expect(detectNetwork('5412345678901234')).to.equal('MasterCard');
   });
  
   it('has a prefix of 55 and a length of 16', function() {
-    detectNetwork('5512345678901234').should.equal('MasterCard');
+    expect(detectNetwork('5512345678901234')).to.equal('MasterCard');
   })
  
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
   var expect = chai.expect;
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5018 and a length of ' + length), function () {
-        expect(detectNetwork('5018' + _.range(length-4).join(''))).to.equal('Maestro');
-      }
-    });
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5020 and a length of ' + length), function () {
-        expect(detectNetwork('5020' + _.range(length-4).join(''))).to.equal('Maestro');
-      }
-    });
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 5038 and a length of ' + length), function () {
-        expect(detectNetwork('5038' + _.range(length-4).join(''))).to.equal('Maestro');
-      }
-    });
-  }
-
-  for (length = 12; length <= 19; length ++) {
-    (function (length) {
-      it('has prefix 6304 and a length of ' + length), function () {
-        expect(detectNetwork('6304' + _.range(length-4).join(''))).to.equal('Maestro');
-      }
-    });
+  var acceptedPrefixes = ['5018', '5020', '5038', '6304'];
+  for (var i = 0; i < acceptedPrefixes.length; i++) {
+    for (var j = 12; j <= 19; j++) {
+      (function(i, j) {
+        it('has a prefix of ' + acceptedPrefixes[i] + ' and a length of ' + j, function() {
+          var extraNumbers = '1'.repeat(j - 4);
+          expect(detectNetwork(acceptedPrefixes[i] + extraNumbers)).to.equal('Maestro');
+          console.log(acceptedPrefixes[i] + extraNumbers);
+        });
+      })(i, j);
+    }
   }
 });
 
@@ -199,37 +177,33 @@ describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   var expect = chai.expect;
-  console.log('inside describe');
 
   for (prefix = 644; prefix <= 649; prefix ++) {
-    console.log('for loop');
     (function(prefix) {
-      it('has a prefix of ' + prefix.toString() + ' and a length of 16'), function() {
+      it('has a prefix of ' + prefix.toString() + ' and a length of 16', function() {
         expect(detectNetwork(prefix.toString() + '4567890123456')).to.equal('Discover');
-      }
-      it('has a prefix of ' + prefix.toString() + ' and a length of 19'), function () {
+      });
+      it('has a prefix of ' + prefix.toString() + ' and a length of 19', function () {
         expect(detectNetwork(prefix.toString() + '4567890123456789')).to.equal('Discover')
-      }
+      });
     }(prefix))
   }
 
-  it('has a prefix of 6011 and a length of 16'), function() {
+  it('has a prefix of 6011 and a length of 16', function() {
     expect(detectNetwork('6011567890123456')).to.equal('Discover');
-    console.log('test');
-  }
+  });
 
-  it('has a prefix of 6011 and a length of 19'), function() {
+  it('has a prefix of 6011 and a length of 19', function() {
     expect(detectNetwork('6011567890123456789')).to.equal('Discover');
-  }
+  });
 
-  it('has a prefix of 65 and a length of 16'), function() {
+  it('has a prefix of 65 and a length of 16', function() {
     expect(detectNetwork('6534567890123456')).to.equal('Discover');
-  }
+  });
 
-  it('has a prefix of 65 and a length of 19'), function() {
+  it('has a prefix of 65 and a length of 19', function() {
     expect(detectNetwork('6534567890123456789')).to.equal('Discover');
-  }
-
+  });
 });
 
 
