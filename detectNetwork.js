@@ -22,15 +22,25 @@ var detectNetwork = function(cardNumber) {
   	return 'Diner\'s Club';
   } else if (cardArray[0] === '3' && (cardArray[1] === '4' || '7') && cardArray.length === 15) {
   	return 'American Express';
+  } else if ((cardArray[0] === '4' && cardArray[1] === '9') && (cardArray.length === 16 || 18 || 19)) {
+    return 'Switch';
+  } else if ((cardArray[0] === '5' && cardArray[1] === '6' && cardArray[2] === '4') && (cardArray.length === 16 || 18 || 19)) {
+    return 'Switch';
+  } else if ((cardArray[0] === '6' && cardArray[1] === '3' && cardArray[2] === '3') && (cardArray.length === 16 || 18 || 19)) {
+    return 'Switch';
+  } else if ((cardArray[0] === '6' && cardArray[1] === '7') && (cardArray.length === 16 || 18 || 19)) {
+    return 'Switch';
   } else if (cardArray[0] === '4' && (cardArray.length === 13 || 16 || 19)) {
   	return 'Visa';
-  } else if (cardArray[0] === '5' && cardArray[1] !== '0' && cardArray.length === 16) {
+  } else if ((cardArray[0] === '5' && cardArray[1] !== '0') && cardArray.length === 16) {
   	return 'MasterCard';
-  } else if (cardArray[0] === '6' &&  cardArray[1] !== '3' && (cardArray.length === 16 || 19)) {
+  } else if (cardArray[0] === '6' && (cardArray[1] === '0' || cardArray[1] === '4' || cardArray[1] === '5') && (cardArray.length === 16 || 19)) {
     return 'Discover';
   } else if ((cardArray[0] === '5' || (cardArray[0] === '6' && cardArray[1] === '3')) && (cardArray.length === 12 || 13 || 14 || 15 || 16 || 17 || 18 || 19)) {
     return 'Maestro';
-  }
+  } else if ((cardArray[0] === '6' && cardArray[1] === '2') && (cardArray.length === 16 || 17 || 18 || 19)) {
+    return 'China UnionPay';
+  } 
 };
 
 
